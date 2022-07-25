@@ -24,7 +24,7 @@ void draw() {
 }
 //
 void keyPressed() {
-  if (key == 'p' || key == 'P') song1.play();
+  //if (key == 'p' || key == 'P') song1.play();
 
   println(key);
   if (key == '1' || key == '9') {//note "9" is assumed to be massive . . . simulates infinity
@@ -61,8 +61,8 @@ void keyPressed() {
     if (song1.isPlaying() ) {
       song1.pause();
     } else if (song1.position() >= song1.length()-song1.length()*9/10) {
-      song1.pause();
       song1.rewind();
+      song1.play ();
     } else {
       song1.play();
     }
