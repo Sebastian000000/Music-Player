@@ -19,8 +19,8 @@ void setup()
 void draw() {
   if (song1.isLooping() && song1.loopCount()!=-1) println("there are", song1.loopCount(), "loops left");
   if (song1.isLooping() && song1.loopCount()==-1) println("Looping infintely");
-  if (song1.isPlaying() && !song1.isLooping()) println("PLay Once");
-  println("Song Position", song1.position(),"Song Length", song1.length());
+  if (song1.isPlaying() && !song1.isLooping()) println("Play Once");
+  println("Song Position", song1.position(), "Song Length", song1.length());
 }
 //
 void keyPressed() {
@@ -48,7 +48,25 @@ void keyPressed() {
   //
   if (key=='f' || key== 'F') song1.skip(1000);//skip forward 1 second or 1000 milliseconds
   if (key=='r' || key== 'R') song1.skip(-1000);
-  
+  //
+  if (key=='s' || key=='S') {
+    if (song1.isPlaying()) {
+      song1.pause();
+      song1.rewind();
+    } else {
+      song1.rewind();
+    }
+  }// end stop
+  if (key=='p' || key=='P') {
+    if (song1.isPlaying() ) {
+      song1.pause();
+    } else if (song1.position() >= song1.length()-song1.length()*9/10) {
+      song1.pause();
+      song1.rewind();
+    } else {
+      song1.play();
+    }
+  }
 }
 //
 void mousePressed() {
