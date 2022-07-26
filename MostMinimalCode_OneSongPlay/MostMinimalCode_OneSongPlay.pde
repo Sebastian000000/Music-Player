@@ -6,13 +6,29 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
 //Global Variables
+color resetWhite=#FFFFFF, black=#000000, purple=#8206C1;
+float titleX, titleY, titleWidth, titleHeight;
+PFont titleFont;
+
+
+//
 Minim minim;
 AudioPlayer song1;//creates playlist
+AudioMetaData songMetaData1;
 //
 void setup() 
 {
+  size(500,400);
+  //
+  //populating variables
+titleX=width*1/4;
+titleY=height*0;
+titleWidth=width*1/2;
+titleHeight=height*1/10;
+titleFont = createFont ("Harrington", 55);
   minim = new Minim(this);
   song1 = minim.loadFile("Alone_-_Color_Out.mp3");
+  songMetaData1 = song1.getMetaData();
   //song1.loop();//parameter is number of repeats
 }
 //
@@ -21,6 +37,15 @@ void draw() {
   if (song1.isLooping() && song1.loopCount()==-1) println("Looping infintely");
   if (song1.isPlaying() && !song1.isLooping()) println("Play Once");
   println("Song Position", song1.position(), "Song Length", song1.length());
+  //
+  background(black);
+  rect(titleX, titleY, titleWidth, titleHeight);
+  fill(purple);
+  textAlign(CENTER, CENTER);
+  textFont(titleFont, 30);
+  text(songMetaData1.title(), titleX, titleY, titleWidth, titleHeight );
+  fill(resetWhite);
+  //
 }
 //
 void keyPressed() {
